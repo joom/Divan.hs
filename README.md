@@ -10,7 +10,7 @@ Currently, all Divan.hs does is to check the prosody patterns of a verse.
 
 Tests should explain what Divan.hs currently is able to do. View `Test.hs` to read the tests or run `runhaskell Test.hs` on your terminal to see the test results.
 
-`Divan.Vezin.vezinName` function currently doesn't cover all *vezin* patterns, it needs `Divan.Vezin.vezinNameMap` to be expanded. Also, Divan.Vezin should be able to take a verse and return the vezin names, such as "*mefâilün mefâilün feûlün*".
+`Divan.Tefile.detectTefile` function currently doesn't cover all *vezin* patterns, it needs `Divan.Tefile.tefileMap` to be expanded. Also, Divan.Tefile should be able to take a verse and return the tefile names, such as "*mefâilün mefâilün feûlün*". (*Tefile*'s are the vezin pattern names.)
 
 In the long run, it should aim to generate simple Divan poems by using the *mazmun* (imagery) patterns for a given *vezin*.
 

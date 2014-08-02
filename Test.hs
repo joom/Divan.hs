@@ -2,6 +2,7 @@ module DivanTest where
 
 import Divan.Syllable
 import Divan.Vezin
+import Divan.Tefile
 import Test.HUnit
 
 tests ::  Test
@@ -17,8 +18,6 @@ tests = TestList $ map TestCase
   -- Vezin tests
   , assertEqual "Read Vezin \".-.-\""       (Just [Open,Closed,Open,Closed])   (readVezin ".-.-")
   , assertEqual "Read Vezin \"--.-\""       (Just [Closed,Closed,Open,Closed]) (readVezin "--.-")
-  , assertEqual "Show Vezin Name \".--\""   (Just "feûlün")                    (vezinName [Open,Closed,Closed])
-  , assertEqual "Show Vezin Name \"-.--\""  (Just "fâilâtün")                  (vezinName [Closed,Open,Closed,Closed])
   , assertEqual "Detect Syl. Vezin \"gön\"" [Closed]                           (detectSyllableVezin "gön")
   , assertEqual "Detect Syl. Vezin \"ne\""  [Open]                             (detectSyllableVezin "ne")
   , assertEqual "Detect Syl. Vezin \"a\""   [Open]                             (detectSyllableVezin "a")
@@ -35,6 +34,14 @@ tests = TestList $ map TestCase
                 "..--..--..--..-"   ((showVezin . detectSentenceVezin) "Yaraşır kim seni ser-defter-i hûban yazalar")
   , assertEqual "Detect Sent.Vezin \"Nâme-i hüsnün için bir yeni unvan yazalar\""
                 "-..-..--..--..-"   ((showVezin . detectSentenceVezin) "Nâme-i hüsnün için bir yeni unvan yazalar")
+  , assertEqual "Detect Sent.Vezin \"Açılmaz ne bir yüz ne bir pencere\""
+                ".--.--.--.."   ((showVezin . detectSentenceVezin) "Açılmaz ne bir yüz ne bir pencere")
+  , assertEqual "Detect Sent.Vezin \"Bakıldıkça vahşet çöker yerlere\""
+                ".--.--.--.."   ((showVezin . detectSentenceVezin) "Bakıldıkça vahşet çöker yerlere")
+
+  -- Tefile tests
+  , assertEqual "Tefile Lookup \".--\""     (Just "feûlün")                    (tefileLookup [Open,Closed,Closed])
+  , assertEqual "Tefile Lookup \"-.--\""    (Just "fâilâtün")                  (tefileLookup [Closed,Open,Closed,Closed])
   ]
 
 runTests ::  IO ()
