@@ -40,8 +40,18 @@ tests = TestList $ map TestCase
                 ".--.--.--.."   ((showVezin . detectSentenceVezin) "Bakıldıkça vahşet çöker yerlere")
 
   -- Tefile tests
-  , assertEqual "Tefile Lookup \".--\""     (Just "feûlün")                    (tefileLookup [Open,Closed,Closed])
-  , assertEqual "Tefile Lookup \"-.--\""    (Just "fâilâtün")                  (tefileLookup [Closed,Open,Closed,Closed])
+  , assertEqual "Tefile Lookup \".--\""               (Just "feûlün")                    (tefileLookup [Open,Closed,Closed])
+  , assertEqual "Tefile Lookup \"-.--\""              (Just "fâilâtün")                  (tefileLookup [Closed,Open,Closed,Closed])
+  -- Simple tefile detection tests
+  , assertEqual "Detect Tefile \"[Open]\""            (Just ["fa"])                      (detectTefile [Open])
+  , assertEqual "Detect Tefile \"[Closed, Closed]\""  (Just ["fa'lün"])                  (detectTefile [Closed,Closed])
+  , assertEqual "Detect Tefile \"nereden\""           (Just ["feilün"])                  ((detectTefile . detectSentenceVezin) "nereden")
+  , assertEqual "Detect Tefile \"nereden geliyor\""   (Just ["feilün","feilün"])         ((detectTefile . detectSentenceVezin) "nereden geliyor")
+  -- Complex tefile detection tests
+  , assertEqual "Detect Tefile \"..--..--..--..-\""
+                (Just ["feilâtün","feilâtün","feilâtün","feilün"])                       (detectSymbolsTefile "..--..--..--..-")
+  , assertEqual "Detect Tefile \"-..-..--..--..-\""
+                (Just ["müfteilün","feilâtün","feilâtün","feilün"])                      (detectSymbolsTefile "-..-..--..--..-")
   ]
 
 runTests ::  IO ()
