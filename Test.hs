@@ -49,9 +49,20 @@ tests = TestList $ map TestCase
   , assertEqual "Detect Tefile \"nereden geliyor\""   (Just ["feilün","feilün"])         ((detectTefile . detectSentenceVezin) "nereden geliyor")
   -- Complex tefile detection tests
   , assertEqual "Detect Tefile \"..--..--..--..-\""
-                (Just ["feilâtün","feilâtün","feilâtün","feilün"])                       (detectSymbolsTefile "..--..--..--..-")
+                (Just ["feilâtün","feilâtün","feilâtün","feilün"])        (detectSymbolsTefile "..--..--..--..-")
   , assertEqual "Detect Tefile \"-..-..--..--..-\""
-                (Just ["müfteilün","feilâtün","feilâtün","feilün"])                      (detectSymbolsTefile "-..-..--..--..-")
+                (Just ["müfteilün","feilâtün","feilâtün","feilün"])       (detectSymbolsTefile "-..-..--..--..-")
+  , assertEqual "Detect Tefile \"Küçük, muttarid, muhteriz darbeler\""
+                (Just ["mefâîlü","müstef'ilâtün","feûl"])                 ((detectTefile . detectSentenceVezin) "Küçük, muttarid, muhteriz darbeler")
+  , assertEqual "Detect Tefile \"Kafeslerde, ramlarda pür' ihtizaz\"" -- we have to put an apostrophe to prevent `ulama` (liaison in French)
+                (Just ["mefâîlü","müstef'ilâtün","feûl"])                 ((detectTefile . detectSentenceVezin) "Kafeslerde, ramlarda pür' ihtizaz")
+
+  -- This test fails because the rule that the last syllable of a verse if ALWAYS closed isn't implemented yet. TODO!
+  , assertEqual "Detect Tefile \"Dinle neyden kim hikâyet etmede\""
+                (Just ["fâilâtün","fâilâtün","fâilün"])                 ((detectTefile . detectSentenceVezin) "Dinle neyden kim hikâyet etmede")
+  -- Tefile equivalence tests
+  , assertEqual "Tefile Equivalence \"[feûlün,feûlün,feûlün,feûl] and [mefâîlü,müstef'ilâtün,feûl]\"" True
+                (["feûlün","feûlün","feûlün","feûl"] `equivalent` ["mefâîlü","müstef'ilâtün","feûl"])
   ]
 
 runTests ::  IO ()

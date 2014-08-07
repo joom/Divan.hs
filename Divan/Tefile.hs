@@ -3,6 +3,7 @@ where
 
 import Divan.Vezin
 import Data.List (intercalate, findIndex)
+import Data.Tuple (swap)
 import Data.Maybe
 
 type Tefile  = String          -- such as "mefâilün"
@@ -13,6 +14,7 @@ tefileMap :: [(Symbols, Tefile)]
 tefileMap = [
   ("."    , "fa"),
   ("-"    , "fâ"),
+  (".-"   , "feûl"),
   ("--"   , "fa'lün"),
   ("..-"  , "feilün"),
   (".--"  , "feûlün"),
@@ -38,6 +40,10 @@ tefileLookup = tefileSymbolsLookup . showVezin
 tefileSymbolsLookup :: Symbols -> Maybe Tefile
 tefileSymbolsLookup s = lookup s tefileMap
 
+-- inverseLookup t = symbols for the given tefile t
+inverseLookup :: Tefile -> Maybe Symbols
+inverseLookup t = lookup t (map swap tefileMap)
+
 -- detectTefile v = the shortest tefile list for the vezin v
 detectTefile :: Vezin -> Maybe [Tefile]
 detectTefile = detectSymbolsTefile . showVezin
@@ -61,5 +67,16 @@ detectSymbolsTefile sy = runThrough sy 1
                 looked   = tefileSymbolsLookup chars
                 fallback = runThrough s (i + 1)
 
+-- tefileName ts = a string containing all tefiles separated by /
 tefileName :: [Tefile] -> String
 tefileName = intercalate " / "
+
+-- equivalent x y = a function to determine if two tefile lists
+--                  correspond to the same vezin
+--                  this function is necesssary because this program
+--                  tries to find the longest tefile names that fit the vezin
+--                  sometimes you might be looking to see if a tefile list
+--                  fits a verse, this is the function to use then.
+equivalent :: [Tefile] -> [Tefile] -> Bool
+equivalent x y = xs == ys
+  where [xs, ys] = map (fmap concat . mapM id . map inverseLookup) [x,y]
