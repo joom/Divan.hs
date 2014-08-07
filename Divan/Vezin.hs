@@ -45,6 +45,11 @@ detectSyllableVezin xs
 detectSyllablesVezin :: [Syllable] -> Vezin
 detectSyllablesVezin = concatMap detectSyllableVezin
 
--- detectSentenceVezin xs = sentence to vezin
+-- detectStringVezin xs = string to vezin
+detectStringVezin :: String -> Vezin
+detectStringVezin = detectSyllablesVezin . syllablize
+
+-- detectSentenceVezin xs = sentence to vezin (can be used for verses)
+--                          always ends with a closed syllable as an aruz rule
 detectSentenceVezin :: Sentence -> Vezin
-detectSentenceVezin = detectSyllablesVezin . syllablize
+detectSentenceVezin = (++ [Closed]) . init . detectStringVezin

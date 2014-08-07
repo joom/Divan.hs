@@ -34,10 +34,10 @@ tests = TestList $ map TestCase
                 "..--..--..--..-"   ((showVezin . detectSentenceVezin) "Yaraşır kim seni ser-defter-i hûban yazalar")
   , assertEqual "Detect Sent.Vezin \"Nâme-i hüsnün için bir yeni unvan yazalar\""
                 "-..-..--..--..-"   ((showVezin . detectSentenceVezin) "Nâme-i hüsnün için bir yeni unvan yazalar")
-  , assertEqual "Detect Sent.Vezin \"Açılmaz ne bir yüz ne bir pencere\""
-                ".--.--.--.."   ((showVezin . detectSentenceVezin) "Açılmaz ne bir yüz ne bir pencere")
-  , assertEqual "Detect Sent.Vezin \"Bakıldıkça vahşet çöker yerlere\""
-                ".--.--.--.."   ((showVezin . detectSentenceVezin) "Bakıldıkça vahşet çöker yerlere")
+  , assertEqual "Detect Sent.Vezin \"Açılmaz ne bir yüz ne bir pencere\"" -- ends with Closed as an aruz rule
+                ".--.--.--.-"   ((showVezin . detectSentenceVezin) "Açılmaz ne bir yüz ne bir pencere")
+  , assertEqual "Detect Sent.Vezin \"Bakıldıkça vahşet çöker yerlere\""  -- ends with Closed as an aruz rule
+                ".--.--.--.-"   ((showVezin . detectSentenceVezin) "Bakıldıkça vahşet çöker yerlere")
 
   -- Tefile tests
   , assertEqual "Tefile Lookup \".--\""               (Just "feûlün")                    (tefileLookup [Open,Closed,Closed])
@@ -56,10 +56,8 @@ tests = TestList $ map TestCase
                 (Just ["mefâîlü","müstef'ilâtün","feûl"])                 ((detectTefile . detectSentenceVezin) "Küçük, muttarid, muhteriz darbeler")
   , assertEqual "Detect Tefile \"Kafeslerde, ramlarda pür' ihtizaz\"" -- we have to put an apostrophe to prevent `ulama` (liaison in French)
                 (Just ["mefâîlü","müstef'ilâtün","feûl"])                 ((detectTefile . detectSentenceVezin) "Kafeslerde, ramlarda pür' ihtizaz")
-
-  -- This test fails because the rule that the last syllable of a verse if ALWAYS closed isn't implemented yet. TODO!
-  , assertEqual "Detect Tefile \"Dinle neyden kim hikâyet etmede\""
-                (Just ["fâilâtün","fâilâtün","fâilün"])                 ((detectTefile . detectSentenceVezin) "Dinle neyden kim hikâyet etmede")
+  , assertEqual "Detect Tefile \"Dinle neyden kim hikâyet' etmede\""  -- apostrophe to prevent `ulama` again
+                (Just ["fâilâtün","fâilâtün","fâilün"])                 ((detectTefile . detectSentenceVezin) "Dinle neyden kim hikâyet' etmede")
   -- Tefile equivalence tests
   , assertEqual "Tefile Equivalence \"[feûlün,feûlün,feûlün,feûl] and [mefâîlü,müstef'ilâtün,feûl]\"" True
                 (["feûlün","feûlün","feûlün","feûl"] `equivalent` ["mefâîlü","müstef'ilâtün","feûl"])

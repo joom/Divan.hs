@@ -2,7 +2,7 @@ module Divan.Tefile
 where
 
 import Divan.Vezin
-import Data.List (intercalate, findIndex)
+import Data.List (intercalate)
 import Data.Tuple (swap)
 import Data.Maybe
 
