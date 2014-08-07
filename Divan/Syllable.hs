@@ -32,7 +32,8 @@ substring x y = drop x . take y
 -- syllables dont contain apostrophes, they are all in lower case
 syllablize :: String -> [Syllable]
 syllablize s
-  | '\'' `elem` tail s = concatMap syllablize [takeWhile (/='\'') s, dropWhile (/='\'') s]
+  | null s = []
+  | '\'' `elem` tail s = concatMap syllablize [takeWhile (/='\'') s, tail $ dropWhile (/='\'') s]
   | isNothing firstVowelIndex = [xs]
 
   | any isNothing [afterVowel 1] = [xs]

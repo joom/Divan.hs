@@ -14,5 +14,44 @@ Tests should explain what Divan.hs currently is able to do. View `Test.hs` to re
 
 In the long run, it should aim to generate simple Divan poems by using the *mazmun* (imagery) patterns for a given *vezin*.
 
+## How do I use it?
+
+To use it, you need to copy the repository to your computer and run it using `runhaskell Executable.hs` in the repo directory, or you can compile it.
+
+This is how we run Divan.hs on a part of one of Fuzûlî's *ghazal*s.
+
+```bash
+runhaskell Executable example/input.txt
+```
+
+And this is the output we get from the program:
+
+```
+Öyle ser-mestem ki idrâk etmezem dünyâ nedir
+öy - le - ser - mes - tem - ki - id - râ - ket - me - zem - dün - yâ - ne - dir
+-.---.---.---.-
+fâilâtün / fâilâtün / fâilâtün / fâilün
+
+Ben kimem sâkî olan kimdir mey û sahbâ nedir
+ben - ki - mem - sâ - kî - o - lan - kim - dir - me - yû - sah - bâ - ne - dir
+-.---.---.---.-
+fâilâtün / fâilâtün / fâilâtün / fâilün
+
+
+Âh u feryâdın Fuzûlî incidibdir' âlemi
+â - hu - fer - yâ - dın - fu - zû - lî - in - ci - dib - dir - â - le - mi
+-.---.---.---.-
+fâilâtün / fâilâtün / fâilâtün / fâilün
+
+Ger belâ-yı ışk' ile hoşnûd' isen gavga nedir
+ger - be - lâ - yı - ışk - i - le - hoş - nûd - i - sen - gav - ga - ne - dir
+-.-.-..--..--..-
+fâilün / müfâ'aletün / müfteilün / müfteilün
+```
+
+The first line is the verse itself. The second line is how the program syllablizes the verse. The third line is the symbol string for the *vezin* (list of Open and Closed). The fourth line is a tef'ile list suggestion.
+
+The last verse of this excerpt is problematic, because the program cannot yet detect the aruz flaws (*kusur*) that are made on purpose. However, it must be pretty much functional so far!
+
 ## License
 [MIT License](http://joom.mit-license.org/)
