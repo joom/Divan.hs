@@ -10,21 +10,23 @@ Currently, all Divan.hs does is to check the prosody patterns of a verse.
 
 Tests should explain what Divan.hs currently is able to do. View `Test.hs` to read the tests or run `runhaskell Test.hs` on your terminal to see the test results.
 
-`Divan.Tefile.detectTefile` function currently doesn't cover all *vezin* patterns, it needs `Divan.Tefile.tefileMap` to be expanded. But still, Divan.Tefile now *is* able to take a verse and return the tefile names, such as "*mefâilün mefâilün feûlün*". (*Tef'ile*'s are the vezin pattern names.)
+`Divan.Tefile.detectTefile` function currently doesn't cover all *vezin* patterns, it needs `Divan.Tefile.tefileMap` to be expanded. But still, Divan.Tefile now **is** able to take a verse and return the tefile names, such as "*mefâilün mefâilün feûlün*". (*Tef'ile*'s are the vezin pattern names.)
 
 In the long run, it should aim to generate simple Divan poems by using the *mazmun* (imagery) patterns for a given *vezin*.
 
 ## How do I use it?
 
-To use it, you need to copy the repository to your computer and run it using `runhaskell Executable.hs` in the repo directory, or you can compile it.
+In order to use or compile the program you need to have [Haskell Platform](http://www.haskell.org/platform/) installed.
 
-This is how we run Divan.hs on a part of one of Fuzûlî's *ghazal*s.
+To run it, you need to clone the repository to your computer and run it using `runhaskell Executable.hs` in the repo directory, or you can compile it with the command `ghc -o Executable Executable.hs`.
+
+This is the terminal command to run Divan.hs on a part of one of Fuzûlî's *ghazal*'s.
 
 ```bash
 runhaskell Executable example/input.txt
 ```
 
-And this is the output we get from the program:
+And this is the output we got from the program, for that *ghazal* excerpt:
 
 ```
 Öyle ser-mestem ki idrâk etmezem dünyâ nedir
@@ -49,9 +51,9 @@ ger - be - lâ - yı - ışk - i - le - hoş - nûd - i - sen - gav - ga - ne - 
 fâilün / müfâ'aletün / müfteilün / müfteilün
 ```
 
-The first line is the verse itself. The second line is how the program syllablizes the verse. The third line is the symbol string for the *vezin* (list of Open and Closed). The fourth line is a tef'ile list suggestion.
+The first line is the verse itself. The second line is how the program syllablizes the verse. The third line is the symbol string for the *vezin* (list of Open and Closed). The fourth line is a *tef'ile* list suggestion.
 
-The last verse of this excerpt is problematic, because the program cannot yet detect the aruz flaws (*kusur*) that are made on purpose. However, it must be pretty much functional so far!
+The last verse of this excerpt is problematic, because the program cannot yet detect the *aruz* flaws (*kusur*) that are made on purpose. However, it must be pretty much functional so far!
 
 ## License
 [MIT License](http://joom.mit-license.org/)
