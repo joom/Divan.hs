@@ -1,12 +1,12 @@
-import Divan.Syllable
-import Divan.Vezin
-import Divan.Tefile
+import           Divan.Syllable
+import           Divan.Tefile
+import           Divan.Vezin
 
-import Data.List (intercalate)
-import Data.Maybe (fromMaybe)
-import Control.Applicative
+import           Control.Applicative
+import           Data.List           (intercalate)
+import           Data.Maybe          (fromMaybe)
 
-import System.Environment (getArgs)
+import           System.Environment  (getArgs)
 
 main :: IO ()
 main = do

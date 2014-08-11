@@ -1,10 +1,10 @@
 module Divan.Tefile
 where
 
-import Divan.Vezin
-import Data.List (intercalate)
-import Data.Tuple (swap)
-import Data.Maybe
+import           Data.List   (intercalate)
+import           Data.Maybe
+import           Data.Tuple  (swap)
+import           Divan.Vezin
 
 type Tefile  = String          -- such as "mefâilün"
 

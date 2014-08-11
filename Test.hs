@@ -1,9 +1,9 @@
 module DivanTest where
 
-import Divan.Syllable
-import Divan.Vezin
-import Divan.Tefile
-import Test.HUnit
+import           Divan.Syllable
+import           Divan.Tefile
+import           Divan.Vezin
+import           Test.HUnit
 
 tests ::  Test
 tests = TestList $ map TestCase

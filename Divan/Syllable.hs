@@ -2,9 +2,9 @@ module Divan.Syllable
 ( syllablize, isVowel, isLongVowel,
   Syllable, Sentence ) where
 
-import Data.Maybe (isNothing, fromJust)
-import Data.Char (isAlpha, toLower)
-import Data.List (findIndex)
+import           Data.Char  (isAlpha, toLower)
+import           Data.List  (findIndex)
+import           Data.Maybe (fromJust, isNothing)
 
 type Syllable = String
 type Sentence = String

@@ -1,5 +1,5 @@
 module Divan where
 
-import Divan.Syllable
-import Divan.Vezin
-import Divan.Tefile
+import           Divan.Syllable
+import           Divan.Tefile
+import           Divan.Vezin

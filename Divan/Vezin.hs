@@ -1,8 +1,8 @@
 module Divan.Vezin
 where
 
-import Divan.Syllable
-import Data.Char (isSpace)
+import           Data.Char      (isSpace)
+import           Divan.Syllable
 
 data SyllableType = Open | Closed deriving (Show, Eq)
 
