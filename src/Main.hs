@@ -1,12 +1,12 @@
-import           Divan.Syllable
-import           Divan.Tefile
-import           Divan.Vezin
+import Divan.Syllable
+import Divan.Tefile
+import Divan.Vezin
 
-import           Control.Applicative
-import           Data.List           (intercalate)
-import           Data.Maybe          (fromMaybe)
+import Control.Applicative
+import Data.List           (intercalate)
+import Data.Maybe          (fromMaybe)
 
-import           System.Environment  (getArgs)
+import System.Environment  (getArgs)
 
 main :: IO ()
 main = do
@@ -21,5 +21,6 @@ outputString input = unlines $ map f (lines input)
               else unlines [x, syllableLine x, symbolsLine x, tefileLine x]
         syllableLine = intercalate " - " . syllablize
         symbolsLine = showVezin . detectSentenceVezin
-        tefileLine x = unicodeShow $ tefileName <$> detectSymbolsTefile (symbolsLine x)
+        tefileLine x = unicodeShow $ tefileName <$>
+                       detectSymbolsTefile (symbolsLine x)
         unicodeShow = fromMaybe "Nothing found."
