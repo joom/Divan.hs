@@ -1,0 +1,37 @@
+name:                Divan
+version:             0.1.0.0
+synopsis:            A Haskell program to check the vezin of Ottoman Divan poetry
+homepage:            https://github.com/joom/
+license:             MIT
+license-file:        LICENSE
+author:              Cumhur Korkut
+maintainer:          cumhurkorkut@gmail.com
+copyright:           2014, Cumhur Korkut
+category:            Natural Language Processing
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  exposed-modules:     Divan, Divan.Vezin, Divan.Tefile, Divan.Syllable
+  build-depends:       base >=4.7 && <5,
+                       text >= 1.1.1.0
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+
+test-suite tests
+  type: exitcode-stdio-1.0
+  hs-source-dirs: tests
+  main-is: tests.hs
+  build-depends: base,
+                 Divan,
+                 HUnit >= 1.2.5.0
+  Default-Language: Haskell2010
+  ghc-options: -Wall -threaded
+
+executable divan
+  Main-is: Main.hs
+  Hs-source-dirs: src
+  Build-depends: base >=4.7 && <5,
+                 Divan
+  Default-Language: Haskell2010
