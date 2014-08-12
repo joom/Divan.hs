@@ -8,7 +8,7 @@ If you want to learn more about the prosody of these poems, [this is a place to 
 
 Currently, all Divan.hs does is to check the prosody patterns of a verse.
 
-Tests should explain what Divan.hs currently is able to do. View `Test.hs` to read the tests or run `runhaskell Test.hs` on your terminal to see the test results.
+Tests should explain what Divan.hs currently is able to do. View `tests/tests.hs` to read the tests or run `cabal test` on your terminal to see the test results.
 
 `Divan.Tefile.detectTefile` function currently doesn't cover all *vezin* patterns, it needs `Divan.Tefile.tefileMap` to be expanded. But still, Divan.Tefile now **is** able to take a verse and return the tefile names, such as "*mefâilün mefâilün feûlün*". (*Tef'ile*'s are the vezin pattern names.)
 
@@ -16,14 +16,37 @@ In the long run, it should aim to generate simple Divan poems by using the *mazm
 
 ## How do I use it?
 
-In order to use or compile the program you need to have [Haskell Platform](http://www.haskell.org/platform/) installed.
+In order to use or compile the program you need to have [Haskell](http://www.haskell.org/) installed.
 
-To run it, you need to clone the repository to your computer and run it using `runhaskell Executable.hs` in the repo directory, or you can compile it with the command `ghc -o Executable Executable.hs`.
+### To install the library
+
+```bash
+cabal install
+```
+
+### REPL
+
+```bash
+cabal repl
+```
+
+### Running the tests
+
+```bash
+cabal test
+```
+
+### To build the executable
+
+```bash
+cabal build divan
+```
 
 This is the terminal command to run Divan.hs on a part of one of Fuzûlî's *ghazal*'s.
 
 ```bash
-runhaskell Executable example/input.txt
+# assuming default build location
+./dist/build/divan/divan example/input.txt
 ```
 
 And this is the output we got from the program, for that *ghazal* excerpt:
