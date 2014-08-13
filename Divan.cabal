@@ -13,13 +13,26 @@ extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
+  default-extensions:  OverloadedStrings
   exposed-modules:     Divan, Divan.Vezin, Divan.Tefile, Divan.Syllable
-  build-depends:       base >=4.7 && <5,
+  build-depends:       base >= 4.7 && <5,
                        text >= 1.1.1.0
   hs-source-dirs:      src
   default-language:    Haskell2010
+  ghc-options: -Wall -threaded
+
+executable divan
+  default-extensions:  OverloadedStrings
+  Main-is: Main.hs
+  Hs-source-dirs: src
+  Build-depends: base,
+                 Divan,
+                 text
+  Default-Language: Haskell2010
+  ghc-options: -Wall -threaded
 
 test-suite tests
+  default-extensions:  OverloadedStrings
   type: exitcode-stdio-1.0
   hs-source-dirs: tests
   main-is: tests.hs
@@ -28,10 +41,3 @@ test-suite tests
                  HUnit >= 1.2.5.0
   Default-Language: Haskell2010
   ghc-options: -Wall -threaded
-
-executable divan
-  Main-is: Main.hs
-  Hs-source-dirs: src
-  Build-depends: base >=4.7 && <5,
-                 Divan
-  Default-Language: Haskell2010

@@ -3,10 +3,12 @@ where
 
 import           Data.List   (intercalate)
 import           Data.Maybe
+import qualified Data.Text as T
 import           Data.Tuple  (swap)
 import           Divan.Vezin
 
-type Tefile  = String          -- such as "mefâilün"
+-- such as "mefâilün"
+type Tefile = T.Text
 
 -- tefileMap = Association list for vezin symbol strings
 --                              and tefile names
@@ -57,19 +59,19 @@ detectTefile = detectSymbolsTefile . showVezin
 detectSymbolsTefile :: Symbols -> Maybe [Tefile]
 detectSymbolsTefile sy = runThrough sy 1
   where runThrough s i = case looked of
-                           Just x  -> if i > length s then Just [x] else
+                           Just x  -> if i > T.length s then Just [x] else
                                       if isJust fallback then fallback else shortest
-                                        where shortest = fmap (x:) (runThrough (drop i s) 1)
+                                        where shortest = fmap (x:) (runThrough (T.drop i s) 1)
                            Nothing -> if chars == s
                                       then Nothing
                                       else fallback
-          where chars    = take i s
+          where chars    = T.take i s
                 looked   = tefileSymbolsLookup chars
                 fallback = runThrough s (i + 1)
 
 -- tefileName ts = a string containing all tefiles separated by /
-tefileName :: [Tefile] -> String
-tefileName = intercalate " / "
+tefileName :: [Tefile] -> T.Text
+tefileName = T.intercalate " / "
 
 -- equivalent x y = a function to determine if two tefile lists
 --                  correspond to the same vezin
@@ -79,4 +81,4 @@ tefileName = intercalate " / "
 --                  fits a verse, this is the function to use then.
 equivalent :: [Tefile] -> [Tefile] -> Bool
 equivalent x y = xs == ys
-  where [xs, ys] = map (fmap concat . mapM id . map inverseLookup) [x,y]
+  where [xs, ys] = map (fmap T.concat . mapM id . map inverseLookup) [x,y]
