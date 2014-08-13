@@ -46,7 +46,7 @@ This is the terminal command to run Divan.hs on a part of one of Fuzûlî's *gha
 
 ```bash
 # assuming default build location
-./dist/build/divan/divan example/input.txt
+./dist/build/Divan/divan example/input.txt
 ```
 
 And this is the output we got from the program, for that *ghazal* excerpt:
