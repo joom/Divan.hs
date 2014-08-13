@@ -9,29 +9,29 @@ tests :: Test
 tests = TestList $ map TestCase
   [
     -- Syllable tests
-    assertEqual "Syllablize \"birbirlerine\""
+    assertEqual "Syllabalize \"birbirlerine\""
     ["bir", "bir", "le", "ri", "ne"]
-    (syllablize "birbirlerine")
+    (syllabalize "birbirlerine")
 
-  , assertEqual "Syllablize \"kafiyelendirmiştir\""
+  , assertEqual "Syllabalize \"kafiyelendirmiştir\""
     ["ka","fi","ye","len","dir","miş","tir"]
-    (syllablize "kafiyelendirmiştir")
+    (syllabalize "kafiyelendirmiştir")
 
-  , assertEqual "Syllablize \"hayatında\""
+  , assertEqual "Syllabalize \"hayatında\""
     ["ha","ya","tın","da"]
-    (syllablize "hayatında")
+    (syllabalize "hayatında")
 
-  , assertEqual "Syllablize \"ece\""
+  , assertEqual "Syllabalize \"ece\""
     ["e", "ce"]
-    (syllablize "ece")
+    (syllabalize "ece")
 
-  , assertEqual "Syllablize \"mef'ûlü\""
+  , assertEqual "Syllabalize \"mef'ûlü\""
     ["mef","û","lü"]
-    (syllablize "mef'ûlü")
+    (syllabalize "mef'ûlü")
 
-  , assertEqual "Syllablize \"müfte'ilün\""
+  , assertEqual "Syllabalize \"müfte'ilün\""
     ["müf","te","i","lün"]
-    (syllablize "müfte'ilün")
+    (syllabalize "müfte'ilün")
 
     -- Vezin tests
   , assertEqual "Read Vezin \".-.-\""
