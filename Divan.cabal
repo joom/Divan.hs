@@ -1,7 +1,12 @@
 name:                Divan
 version:             0.1.0.0
-synopsis:            A Haskell program to check the vezin of Ottoman Divan poetry
-homepage:            https://github.com/joom/
+synopsis:            Ottoman Divan poetry vezin (prosody) checker.
+description:         Ottoman Divan poetry vezin (prosody) checker.
+                     .
+                     \Documentation: (<http://joom.github.io/Divan.hs>)
+                     .
+                     \Repository: (<http://github.com/joom/Divan.hs>)
+homepage:            https://github.com/joom/Divan.hs
 license:             MIT
 license-file:        LICENSE
 author:              Cumhur Korkut

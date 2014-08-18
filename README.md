@@ -78,5 +78,9 @@ The first line is the verse itself. The second line is how the program syllabliz
 
 The last verse of this excerpt is problematic, because the program cannot yet detect the *aruz* flaws (*kusur*) that are made on purpose. However, it must be pretty much functional so far!
 
+## Further Documentation
+
+Haddock generated documentation can be read [from here](http://joom.github.io/Divan.hs).
+
 ## License
 [MIT License](http://joom.mit-license.org/)

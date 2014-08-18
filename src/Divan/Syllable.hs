@@ -9,32 +9,42 @@ import qualified Data.Text as T
 type Syllable = T.Text
 type Sentence = T.Text
 
--- charAt xs i = Just x, where x character at index i
---               Nothing, is i is out of bounds
+{-|
+  Returns Just x, where x character at index i
+       or Nothing, is i is out of bounds
+-}
 charAt :: T.Text -> Int -> Maybe Char
 charAt xs i = if T.length xs > i then Just (xs `T.index` i) else Nothing
 
--- isVowel x = True if x is a vowel,
---             False otherwise
+{-|
+  Returns True if x is a vowel,
+       or False otherwise
+-}
 isVowel :: Char -> Bool
 isVowel x = x `elem` "aeiıoöuüâêîû"
 
--- isLongVowel x = True if x is a long vowel,
---                 False otherwise
+{-|
+  Returns True if x is a long vowel like 'â', 'ê', 'î', or 'û',
+       or False otherwise
+-}
 isLongVowel :: Char -> Bool
 isLongVowel x = x `elem` "âêîû"
 
--- substring x y xs = Java's substring
+-- | Java's substring.
 substring :: Int -> Int -> T.Text -> T.Text
 substring x y = T.drop x . T.take y
 
--- elemT c t = True is the char c is in the text t,
---             False otherwise
+{-|
+  Returns True is the char is in the text,
+       or False otherwise
+-}
 elemT :: Char -> T.Text -> Bool
 elemT c t = isJust $ T.find (==c) t
 
--- syllabalize xs = list of Turkish syllables of xs
--- syllables dont contain apostrophes, they are all in lower case
+-- | List of Turkish syllables of the given text.
+-- Syllables dont contain apostrophes, they are all in lower case.
+-- Note that apostrophe is a definite syllable separator,
+-- for words of Arabic origin which containing the sound "ع".
 syllabalize :: T.Text -> [Syllable]
 syllabalize s
   | T.null s = []

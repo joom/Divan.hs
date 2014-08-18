@@ -7,32 +7,32 @@ import           Divan.Syllable
 
 data SyllableType = Open | Closed deriving (Show, Eq)
 
--- readSyllableType x = the syllable type x symbolizes
---                      . for Open, - for Closed
+-- | The syllable type x symbolizes
+-- (. for Open, - for Closed)
 readSyllableType :: Char -> Maybe SyllableType
 readSyllableType '.' = Just Open
 readSyllableType '-' = Just Closed
 readSyllableType _   = Nothing
 
--- showSyllableType x = the symbol for the syllable type x
---                      . for Open, - for Closed
+-- | The symbol for the syllable type x
+-- (. for Open, - for Closed)
 showSyllableType :: SyllableType -> Char
 showSyllableType Open   = '.'
 showSyllableType Closed = '-'
 
 type Vezin   = [SyllableType]
--- such as "--..--..-.-"
+-- | Such as "--..--..-.-"
 type Symbols = T.Text
 
--- readVezin xs = the vezin for a symbol string like "..-"
+-- | The vezin for a symbol string like "..-"
 readVezin :: Symbols -> Maybe Vezin
 readVezin = mapM readSyllableType . T.unpack . T.filter (not . isSpace)
 
--- showVezin v = symbol string for the vezin
+-- | Symbols for the vezin
 showVezin :: Vezin -> Symbols
 showVezin = T.pack . map showSyllableType
 
--- detectSyllableVezin xs = vezin for the given syllable
+-- | Vezin for the given syllable.
 --  We cannot directly map each syllable to SyllableType,
 --  because some long syllables have 1.5 value.
 detectSyllableVezin :: Syllable -> Vezin
@@ -47,15 +47,15 @@ detectSyllableVezin xs
   -- "alt", "üst"
   | otherwise = [Closed]
 
--- detectSyllablesVezin xs = syllable list to vezin
+-- | Syllable list to vezin
 detectSyllablesVezin :: [Syllable] -> Vezin
 detectSyllablesVezin = concatMap detectSyllableVezin
 
--- detectStringVezin xs = string to vezin
-detectStringVezin :: T.Text -> Vezin
-detectStringVezin = detectSyllablesVezin . syllabalize
+-- | Text to vezin
+detectTextVezin :: T.Text -> Vezin
+detectTextVezin = detectSyllablesVezin . syllabalize
 
--- detectSentenceVezin xs = sentence to vezin (can be used for verses)
---                          always ends with a closed syllable as an aruz rule
+-- | Sentence to vezin (can be used for verses)
+-- Always ends with a closed syllable as an aruz rule.
 detectSentenceVezin :: Sentence -> Vezin
-detectSentenceVezin = (++ [Closed]) . init . detectStringVezin
+detectSentenceVezin = (++ [Closed]) . init . detectTextVezin

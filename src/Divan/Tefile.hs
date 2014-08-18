@@ -1,17 +1,15 @@
 module Divan.Tefile
 where
 
-import           Data.List   (intercalate)
 import           Data.Maybe
 import qualified Data.Text as T
 import           Data.Tuple  (swap)
 import           Divan.Vezin
 
--- such as "mefâilün"
+-- | Such as "mefâilün"
 type Tefile = T.Text
 
--- tefileMap = Association list for vezin symbol strings
---                              and tefile names
+-- | Association list for vezin symbol strings and tefile names.
 tefileMap :: [(Symbols, Tefile)]
 tefileMap = [
   ("."    , "fa"),
@@ -34,32 +32,32 @@ tefileMap = [
   ("--.--", "müstef'ilâtün"),
   ("..-.-", "mütefâ'ilün")]
 
--- tefileLookup v = tefile name for the given vezin v
+-- | Tefile name for the given vezin.
 tefileLookup :: Vezin -> Maybe Tefile
 tefileLookup = tefileSymbolsLookup . showVezin
 
--- tefileSymbolsLookup s = tefile name for the given symbol string s
+-- | Tefile name for the given Symbols.
 tefileSymbolsLookup :: Symbols -> Maybe Tefile
 tefileSymbolsLookup s = lookup s tefileMap
 
--- inverseLookup t = symbols for the given tefile t
+-- | Symbols for the given tefile.
 inverseLookup :: Tefile -> Maybe Symbols
 inverseLookup t = lookup t (map swap tefileMap)
 
--- detectTefile v = the shortest tefile list for the vezin v
+-- | The shortest tefile list for the vezin.
 detectTefile :: Vezin -> Maybe [Tefile]
 detectTefile = detectSymbolsTefile . showVezin
 
--- detectSymbolsTefile sy = find the shortest tefile list for the symbol string sy i
---                          by breadth-first search
---                          note that we have a preference to find
---                            the longest possible tefile name at a time
---                            because we don't want to end up with a tefile list
---                            with one syllable names
+-- | Find the shortest tefile list
+-- for the Symbols by breadth-first search.
+-- Note that we have a preference to find
+-- the longest possible tefile name at a time
+-- because we don't want to end up with a tefile list
+-- with one syllable names.
 detectSymbolsTefile :: Symbols -> Maybe [Tefile]
 detectSymbolsTefile sy = runThrough sy 1
   where runThrough s i = case looked of
-                           Just x  -> if i > T.length s then Just [x] else
+                           Just x  -> if i > T.length s  then Just [x] else
                                       if isJust fallback then fallback else shortest
                                         where shortest = fmap (x:) (runThrough (T.drop i s) 1)
                            Nothing -> if chars == s
@@ -69,16 +67,16 @@ detectSymbolsTefile sy = runThrough sy 1
                 looked   = tefileSymbolsLookup chars
                 fallback = runThrough s (i + 1)
 
--- tefileName ts = a string containing all tefiles separated by /
+-- | Returns a string containing all tefiles separated by /
 tefileName :: [Tefile] -> T.Text
 tefileName = T.intercalate " / "
 
--- equivalent x y = a function to determine if two tefile lists
---                  correspond to the same vezin
---                  this function is necesssary because this program
---                  tries to find the longest tefile names that fit the vezin
---                  sometimes you might be looking to see if a tefile list
---                  fits a verse, this is the function to use then.
+-- | A function to determine if two tefile lists
+-- correspond to the same vezin.
+-- This function is necesssary because this program
+-- tries to find the longest tefile names that fit the vezin.
+-- Sometimes you might be looking to see if a tefile list
+-- fits a verse, this is the function to use then.
 equivalent :: [Tefile] -> [Tefile] -> Bool
 equivalent x y = xs == ys
-  where [xs, ys] = map (fmap T.concat . mapM id . map inverseLookup) [x,y]
+  where [xs, ys] = map (fmap T.concat . mapM inverseLookup) [x, y]
