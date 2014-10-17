@@ -1,6 +1,5 @@
 module Main where
 
-import Divan.Syllable
 import Divan.Tefile
 import Divan.Vezin
 import Test.HUnit
@@ -8,33 +7,8 @@ import Test.HUnit
 tests :: Test
 tests = TestList $ map TestCase
   [
-    -- Syllable tests
-    assertEqual "Syllabalize \"birbirlerine\""
-    ["bir", "bir", "le", "ri", "ne"]
-    (syllabalize "birbirlerine")
-
-  , assertEqual "Syllabalize \"kafiyelendirmiştir\""
-    ["ka","fi","ye","len","dir","miş","tir"]
-    (syllabalize "kafiyelendirmiştir")
-
-  , assertEqual "Syllabalize \"hayatında\""
-    ["ha","ya","tın","da"]
-    (syllabalize "hayatında")
-
-  , assertEqual "Syllabalize \"ece\""
-    ["e", "ce"]
-    (syllabalize "ece")
-
-  , assertEqual "Syllabalize \"mef'ûlü\""
-    ["mef","û","lü"]
-    (syllabalize "mef'ûlü")
-
-  , assertEqual "Syllabalize \"müfte'ilün\""
-    ["müf","te","i","lün"]
-    (syllabalize "müfte'ilün")
-
     -- Vezin tests
-  , assertEqual "Read Vezin \".-.-\""
+    assertEqual "Read Vezin \".-.-\""
     (Just [Open,Closed,Open,Closed])
     (readVezin ".-.-")
 

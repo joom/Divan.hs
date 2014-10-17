@@ -1,4 +1,4 @@
-import Divan.Syllable
+import Guguk.Syllabification
 import Divan.Tefile
 import Divan.Vezin
 
@@ -20,7 +20,7 @@ outputString input = T.unlines $ map f (T.lines input)
   where f x = if T.null x
               then x
               else T.unlines [x, syllableLine x, symbolsLine x, tefileLine x]
-        syllableLine = T.intercalate " - " . syllabalize
+        syllableLine = T.intercalate " - " . syllabify
         symbolsLine = showVezin . detectSentenceVezin
         tefileLine x = unicodeShow $ tefileName <$>
                        detectSymbolsTefile (symbolsLine x)

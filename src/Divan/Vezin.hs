@@ -3,8 +3,10 @@ where
 
 import           Data.Char      (isSpace)
 import qualified Data.Text as T
-import           Divan.Syllable
+import           Guguk.Syllabification
+import           Guguk.TurkishAlphabet
 
+type Sentence = T.Text
 data SyllableType = Open | Closed deriving (Show, Eq)
 
 -- | The syllable type x symbolizes
@@ -53,7 +55,7 @@ detectSyllablesVezin = concatMap detectSyllableVezin
 
 -- | Text to vezin
 detectTextVezin :: T.Text -> Vezin
-detectTextVezin = detectSyllablesVezin . syllabalize
+detectTextVezin = detectSyllablesVezin . syllabify
 
 -- | Sentence to vezin (can be used for verses)
 -- Always ends with a closed syllable as an aruz rule.

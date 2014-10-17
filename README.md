@@ -1,4 +1,4 @@
-# Divan.hs
+# Divan.hs [![Build Status](https://secure.travis-ci.org/joom/Divan.hs.svg)](http://travis-ci.org/joom/Divan.hs)
 
 A Haskell program to check the *vezin* (prosody) of [Ottoman *Divan* poetry](http://en.wikipedia.org/wiki/Ottoman_poetry).
 
@@ -17,6 +17,12 @@ In the long run, it should aim to generate simple Divan poems by using the *mazm
 ## How do I use it?
 
 In order to use or compile the program you need to have [Haskell](http://www.haskell.org/) installed.
+
+You also need to install [Guguk](https://github.com/joom/Guguk.git), an unstable library NLP library for Turkish, which is why it is not on Hackage yet. You can install Guguk with these commands:
+
+```
+git clone https://github.com/joom/Guguk.git && cd Guguk && cabal install
+```
 
 ### To install the library
 
