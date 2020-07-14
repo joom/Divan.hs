@@ -1,18 +1,18 @@
 # Divan.hs [![Build Status](https://secure.travis-ci.org/joom/Divan.hs.svg)](http://travis-ci.org/joom/Divan.hs)
 
-A Haskell program to check the *vezin* (prosody) of [Ottoman *Divan* poetry](http://en.wikipedia.org/wiki/Ottoman_poetry).
+A Haskell program to check the *vezin* (meter) of [Ottoman *Divan* poetry](http://en.wikipedia.org/wiki/Ottoman_poetry).
 
-If you want to learn more about the prosody of these poems, [this is a place to start](http://en.wikipedia.org/wiki/Arabic_prosody). This repository currently does not have much documentation about why things are the way they are, since it's mostly related to the grammatical rules of Turkish and the prosody rules of Divan poetry.
+If you want to learn more about the meter of these poems, [this is a place to start](http://en.wikipedia.org/wiki/Arabic_prosody). This repository currently does not have much documentation about why things are the way they are, since it's mostly related to the grammatical rules of Turkish and the prosody rules of Divan poetry.
 
 ## What does this do?
 
-Currently, all Divan.hs does is to check the prosody patterns of a verse.
+Currently, all Divan.hs does is to check the vezin patterns of a verse.
 
 Tests should explain what Divan.hs currently is able to do. View `tests/tests.hs` to read the tests or run `cabal test` on your terminal to see the test results.
 
 `Divan.Tefile.detectTefile` function currently doesn't cover all *vezin* patterns, it needs `Divan.Tefile.tefileMap` to be expanded. But still, Divan.Tefile now **is** able to take a verse and return the tefile names, such as "*mefâilün mefâilün feûlün*". (*Tef'ile*'s are the vezin pattern names.)
 
-In the long run, it should aim to generate simple Divan poems by using the *mazmun* (imagery) patterns for a given *vezin*.
+In the long run, it should aim to generate simple Divan poems by using the *mazmun* (imagery) patterns for a given *vezin*. But there is no work on that yet.
 
 ## How do I use it?
 
@@ -82,7 +82,7 @@ fâilün / müfâ'aletün / müfteilün / müfteilün
 
 The first line is the verse itself. The second line is how the program syllablizes the verse. The third line is the symbol string for the *vezin* (list of Open and Closed). The fourth line is a *tef'ile* list suggestion.
 
-The last verse of this excerpt is problematic, because the program cannot yet detect the *aruz* flaws (*kusur*) that are made on purpose. However, it must be pretty much functional so far!
+The last verse of this excerpt is incorrect, because the program cannot yet detect the *aruz* flaws (*kusur*) that are made on purpose. However, it must be pretty much functional so far!
 
 ## Further Documentation
 
